@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BXZ-ANTIX · Sistema optimizado por BUHOXZ</title>
+    <meta name="description" content="BXZ-ANTIX: Sistema operativo optimizado y masterizado por Luis E. Urbaneja (BUHOXZ). Rápido, estable y fácil de usar.">
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        /* ---------- RESET Y BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                         "Helvetica Neue", Arial, sans-serif;
+            background: #0d1220;
+            color: #e6eaf2;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: #6aa9ff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover { color: #a8c8ff; }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2a4d8a 50%, #3a7bd5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto de luz sutil */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%,
+                        rgba(255,255,255,0.08) 0%,
+                        transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
+            animation: flotar 4s ease-in-out infinite;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #ffffff, #a8c8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            opacity: 0.92;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .autor {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero .autor strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #1a2a6c;
+            box-shadow: 0 4px 20px rgba(255,255,255,0.25);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(255,255,255,0.35);
+            color: #1a2a6c;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.12);
+            color: #ffffff;
+            border: 2px solid rgba(255,255,255,0.35);
+            backdrop-filter: blur(6px);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            color: #ffffff;
+        }
+
+        /* Indicador de scroll */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.6;
+            animation: bounce 2s infinite;
+            font-size: 1.5rem;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ---------- SECCIONES ---------- */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            text-align: center;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        section h2 + .subtitle {
+            text-align: center;
+            opacity: 0.7;
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
+
+        /* ---------- CARACTERÍSTICAS ---------- */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature {
+            background: #151b2e;
+            border: 1px solid #1f2941;
+            border-radius: 16px;
+            padding: 2rem 1.6rem;
+            transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .feature:hover {
+            transform: translateY(-6px);
+            border-color: #3a7bd5;
+            box-shadow: 0 12px 32px rgba(58,123,213,0.18);
+        }
+
+        .feature .icono {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .feature h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .feature p {
+            font-size: 0.95rem;
+            opacity: 0.78;
+        }
+
+        /* ---------- DESCARGA ---------- */
+        .descarga {
+            text-align: center;
+            background: linear-gradient(135deg, #1a2a6c, #3a7bd5);
+            border-radius: 24px;
+            padding: 3.5rem 2rem;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        .descarga h2 {
+            color: #ffffff;
+            margin-bottom: 0.8rem;
+        }
+
+        .descarga p {
+            opacity: 0.92;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .descarga .btn-primary {
+            background: #ffffff;
+            color: #1a2a6c;
+            font-size: 1.05rem;
+            padding: 1rem 2.5rem;
+        }
+
+        .nota {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+
+        /* ---------- CONTACTO ---------- */
+        .contacto {
+            text-align: center;
+        }
+
+        .contacto-grid {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contacto-item {
+            background: #151b2e;
+            border: 1px solid #1f2941;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            min-width: 240px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .contacto-item:hover {
+            border-color: #3a7bd5;
+            transform: translateY(-3px);
+        }
+
+        .contacto-item .emoji {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .contacto-item a {
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            opacity: 0.55;
+            font-size: 0.85rem;
+            border-top: 1px solid #1f2941;
+            margin-top: 3rem;
+        }
+
+        footer .buho {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 600px) {
+            section { padding: 3.5rem 1.2rem; }
+            .descarga { padding: 2.5rem 1.5rem; }
+            .btn { padding: 0.8rem 1.6rem; font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+        <div class="hero-content">
+            <img src="logo.png" alt="Logo BXZ-ANTIX" class="logo">
+            <h1>Bienvenido a <span>BXZ-ANTIX</span></h1>
+            <p class="tagline">Sistema optimizado, estable y fácil de usar.</p>
+            <p class="autor">
+                Masterizado por <strong>Luis E. Urbaneja (BUHOXZ)</strong> 🦉
+            </p>
+            <div class="btn-group">
+                <a href="#descarga" class="btn btn-primary">⬇ Descargar</a>
+                <a href="#caracteristicas" class="btn btn-secondary">Conocer más</a>
+            </div>
+        </div>
+        <div class="scroll-hint">⌄</div>
+    </header>
+
+    <!-- ============ CARACTERÍSTICAS ============ -->
+    <section id="caracteristicas">
+        <h2>¿Por qué BXZ-ANTIX?</h2>
+        <p class="subtitle">Todo lo que necesitas, sin lo que no.</p>
+
+        <div class="features">
+            <div class="feature">
+                <span class="icono">⚡</span>
+                <h3>Rendimiento óptimo</h3>
+                <p>Optimizaciones profundas para exprimir tu hardware sin sacrificar estabilidad.</p>
+            </div>
+            <div class="feature">
+                <span class="icono">🛡️</span>
+                <h3>Estable y seguro</h3>
+                <p>Base sólida, actualizaciones controladas y configuración pensada para durar.</p>
+            </div>
+            <div class="feature">
+                <span class="icono">🎨</span>
+                <h3>Interfaz cuidada</h3>
+                <p>Diseño limpio y coherente, listo para usar desde el primer arranque.</p>
+            </div>
+            <div class="feature">
+                <span class="icono">🧰</span>
+                <h3>Herramientas incluidas</h3>
+                <p>Aplicaciones esenciales preinstaladas y configuradas para el día a día.</p>
+            </div>
+            <div class="feature">
+                <span class="icono">🦉</span>
+                <h3>Soporte cercano</h3>
+                <p>Atención directa por WhatsApp o correo. Estamos para ayudarte.</p>
+            </div>
+            <div class="feature">
+                <span class="icono">💬</span>
+                <h3>Comunidad</h3>
+                <p>Únete a otros usuarios de BXZ-ANTIX y comparte tus experiencias.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ DESCARGA ============ -->
+    <section id="descarga">
+        <div class="descarga">
+            <h2>Descarga BXZ-ANTIX v1.0</h2>
+            <p>Última versión disponible. Optimizada y lista para instalar.</p>
+            <a href="#" class="btn btn-primary">⬇ Descargar ISO</a>
+            <p class="nota">Tamaño aproximado: XXX MB · Verifica el hash SHA256 en el enlace de descarga.</p>
+        </div>
+    </section>
+
+    <!-- ============ CONTACTO ============ -->
+    <section id="contacto" class="contacto">
+        <h2>¿Necesitas ayuda?</h2>
+        <p class="subtitle">Estamos a un mensaje de distancia.</p>
+
+        <div class="contacto-grid">
+            <div class="contacto-item">
+                <span class="emoji">📱</span>
+                <p>Teléfono / WhatsApp</p>
+                <a href="https://wa.me/TUNUMERO">+34 600 000 000</a>
+            </div>
+            <div class="contacto-item">
+                <span class="emoji">✉️</span>
+                <p>Correo electrónico</p>
+                <a href="mailto:soporte@bxz-antix.org">soporte@bxz-antix.org</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <span class="buho">🦉</span>
+        BXZ-ANTIX © 2026 · Hecho con dedicación por <strong>BUHOXZ</strong>
+    </footer>
+
+</body>
+</html>
